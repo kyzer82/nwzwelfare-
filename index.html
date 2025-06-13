@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네오위즈 복리후생 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!--
+    Infographic Narrative & Structure Plan:
+    - Goal: To showcase Neowiz's comprehensive employee benefits, portraying the company as a great place to work that supports employees throughout their career and life.
+    - Theme: Professional, vibrant, and data-driven, using the 'Brilliant Blues' color palette.
+    - Structure:
+      1. Header: Catchy title and a key highlight.
+      2. Section 1 - Work & Life Balance (휴가 및 근무 제도): Focus on generous leave policies.
+      3. Section 2 - Celebrating Milestones (축하 및 경조사 지원제도): Visualize support for personal and professional achievements.
+      4. Section 3 - Strong Financial Support (사내대출/대출이자지원 제도): Detail loans and interest support.
+      5. Section 4 - Comprehensive Health Care (건강관리 지원제도): Showcase health insurance and wellness programs.
+      6. Section 5 - A Fun & Convenient Workplace (동호회 및 편의 지원): Illustrate perks for daily life.
+
+    Visualization Selection Plan (NO SVG, NO MERMAID):
+    - Data Point: Family-friendly Leave -> Goal: Compare -> Visualization: Bar Chart (Chart.js/Canvas).
+    - Data Point: Long-term Service Awards -> Goal: Compare -> Visualization: Bar Chart (Chart.js/Canvas).
+    - Data Point: Loan Types -> Goal: Organize/Compare -> Visualization: HTML Table.
+    - Data Point: Group Insurance Coverage -> Goal: Organize -> Visualization: HTML Table.
+    - Data Point: Convenience Facilities -> Goal: Organize/Inform -> Visualization: HTML/CSS Icon List.
+    - Data Point: Refresh Leave -> Goal: Inform -> Visualization: HTML/CSS Timeline.
+
+    Color Palette: Brilliant Blues (#0B3954, #087E8B, #BFD7EA, #FF5A5F, #FFFFFF)
+
+    NEITHER Mermaid JS NOR SVG were used. All charts are rendered on Canvas via Chart.js. Diagrams are built with HTML/CSS.
+    -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F0F4F8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #0B3954, #087E8B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            border-left: 4px solid #BFD7EA;
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -61px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid #087E8B;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black gradient-text mb-2">네오위즈 복리후생</h1>
+            <p class="text-lg md:text-xl text-gray-600">일과 삶의 완벽한 균형을 위한 지원</p>
+        </header>
+
+        <main class="space-y-12">
+            
+            <section id="work-life-balance">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">WORK & LIFE BALANCE: 휴가 및 근무 제도</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-[#0B3954] mb-4">Refresh 휴가: 재충전의 시간</h3>
+                        <p class="text-gray-600 mb-6">3년 근속마다 10일의 유급 휴가를 부여하여 충분한 휴식과 재충전의 기회를 제공합니다.</p>
+                        <div class="space-y-8 timeline">
+                            <div class="timeline-item">
+                                <p class="font-bold text-lg text-[#087E8B]">3년 근속</p>
+                                <p class="text-gray-700">리프레시 휴가 10일 부여</p>
+                            </div>
+                            <div class="timeline-item">
+                                <p class="font-bold text-lg text-[#087E8B]">6년 근속</p>
+                                <p class="text-gray-700">리프레시 휴가 10일 부여</p>
+                            </div>
+                             <div class="timeline-item">
+                                <p class="font-bold text-lg text-[#087E8B]">9년 근속</p>
+                                <p class="text-gray-700">리프레시 휴가 10일 부여</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-[#0B3954] mb-4">가족친화 휴가</h3>
+                        <p class="text-gray-600 mb-6">임신, 출산, 육아 등 가족의 중요한 순간을 함께할 수 있도록 다양한 휴가 제도를 운영합니다.</p>
+                        <div class="chart-container">
+                            <canvas id="familyLeaveChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="celebration">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">CELEBRATING MILESTONES: 축하 및 경조사 지원</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-[#0B3954] mb-4">장기근속 지원</h3>
+                        <p class="text-gray-600 mb-6">네오위즈와 함께한 시간에 대한 감사와 존중을 담아 특별한 보상을 제공합니다.</p>
+                        <div class="chart-container">
+                            <canvas id="longServiceChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-[#0B3954] mb-4">주요 경조사 지원</h3>
+                        <p class="text-gray-600 mb-6">인생의 중요한 순간, 회사가 함께 축하하고 위로하며 든든한 버팀목이 되어 드립니다.</p>
+                         <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="p-3 font-bold">구분</th>
+                                        <th class="p-3 font-bold">지원금</th>
+                                        <th class="p-3 font-bold">기타 지원</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b"><td class="p-3">본인 결혼</td><td class="p-3">50만원</td><td class="p-3">화환, 휴가 10일</td></tr>
+                                    <tr class="border-b"><td class="p-3">자녀 출산</td><td class="p-3">20만원</td><td class="p-3">배우자 휴가 10일</td></tr>
+                                    <tr class="border-b"><td class="p-3">부모 환갑/칠순</td><td class="p-3">20만원</td><td class="p-3">화환, 휴가 1일</td></tr>
+                                    <tr class="border-b"><td class="p-3">배우자 사망</td><td class="p-3">100만원</td><td class="p-3">화환, 상조, 보험 4천만원</td></tr>
+                                    <tr class="border-b"><td class="p-3">부모/자녀 사망</td><td class="p-3">50만원</td><td class="p-3">화환, 상조, 휴가 6일</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">* 본인 사망 시 200만원 및 보험 1억, 유가족 생활안정 지원금이 별도 지급됩니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="financial-support">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">FINANCIAL SUPPORT: 사내대출 및 이자 지원</h2>
+                <div class="bg-white rounded-lg shadow-lg p-6 md:col-span-2">
+                    <h3 class="text-xl font-bold text-[#0B3954] mb-4">사내 대출 제도</h3>
+                    <p class="text-gray-600 mb-6">직원들의 안정적인 생활을 위해 목적에 따라 낮은 금리의 대출 제도를 운영합니다.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-100 text-[#0B3954]">
+                                <tr>
+                                    <th class="p-3 font-bold">대출 종류</th>
+                                    <th class="p-3 font-bold">한도</th>
+                                    <th class="p-3 font-bold">이율</th>
+                                    <th class="p-3 font-bold">상환 기간</th>
+                                    <th class="p-3 font-bold">근속 요건</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b"><td class="p-3">보금자리 (사회초년생)</td><td class="p-3">3,000만원</td><td class="p-3">1.0%</td><td class="p-3">60개월</td><td class="p-3">3개월 이상</td></tr>
+                                <tr class="border-b"><td class="p-3">결혼준비</td><td class="p-3">2,000만원</td><td class="p-3">2.0%</td><td class="p-3">36개월</td><td class="p-3">6개월 이상</td></tr>
+                                <tr class="border-b"><td class="p-3">생활안정</td><td class="p-3">2,000만원</td><td class="p-3">2.5%</td><td class="p-3">24개월</td><td class="p-3">6개월 이상</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="health-care">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">HEALTH CARE: 건강 관리 지원</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <span class="text-5xl">🏥</span>
+                        <h3 class="text-xl font-bold text-[#0B3954] my-2">단체 상해보험</h3>
+                        <p class="text-gray-600">본인, 배우자, 자녀까지 실손/치과형 보험을 지원하여 의료비 부담을 덜어드립니다.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <span class="text-5xl">🧑‍⚕️</span>
+                        <h3 class="text-xl font-bold text-[#0B3954] my-2">매년 종합 건강검진</h3>
+                        <p class="text-gray-600">전 직원을 대상으로 매년 종합 건강검진을 전액 지원하여 건강한 삶을 응원합니다.</p>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-lg p-6">
+                        <span class="text-5xl">💆</span>
+                        <h3 class="text-xl font-bold text-[#0B3954] my-2">헬스키핑 (마사지)</h3>
+                        <p class="text-gray-600">전문가의 마사지 서비스를 통해 업무 피로를 해소하고 활력을 되찾을 수 있습니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="office-life">
+                 <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">ENJOYABLE LIFE: 즐거운 회사 생활</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-[#0B3954] mb-4">사내 동호회 & 교육</h3>
+                        <p class="text-gray-600 mb-6">다양한 동호회 활동과 어학 클래스를 지원하여 배움과 즐거움이 가득한 회사 생활을 만듭니다.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center"><span class="text-2xl mr-4">🎨</span><span>원예, 스포츠, 게임, 커피 등 동호회 활동비 월 2만원 지원</span></li>
+                            <li class="flex items-center"><span class="text-2xl mr-4">📚</span><span>원어민 1:1 및 그룹 어학 클래스 운영 (영어)</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-[#0B3954] mb-4">편의 지원</h3>
+                        <p class="text-gray-600 mb-6">최고의 업무 효율을 위한 다채로운 편의 시설과 서비스를 제공합니다.</p>
+                         <ul class="space-y-3">
+                            <li class="flex items-center"><span class="text-2xl mr-4">🍽️</span><span>조식, 중식, 석식 무상 제공</span></li>
+                            <li class="flex items-center"><span class="text-2xl mr-4">🚕</span><span>야간/새벽 출퇴근 택시비 지원</span></li>
+                            <li class="flex items-center"><span class="text-2xl mr-4">🏨</span><span>전국 법인 콘도 이용 지원</span></li>
+                            <li class="flex items-center"><span class="text-2xl mr-4">🚗</span><span>차량 외관 세차 (카케어) 서비스</span></li>
+                        </ul>
+                    </div>
+                 </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-gray-300">
+            <p class="text-gray-500">NEOWIZ | Smarter Play</p>
+        </footer>
+    </div>
+
+    <script>
+        const brilliantBlues = {
+            darkBlue: '#0B3954',
+            mediumBlue: '#087E8B',
+            lightBlue: '#BFD7EA',
+            accentRed: '#FF5A5F',
+            white: '#FFFFFF'
+        };
+
+        const chartTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        function wrapLabel(label, maxLength) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        // Family Leave Chart
+        const familyLeaveCtx = document.getElementById('familyLeaveChart');
+        if (familyLeaveCtx) {
+            new Chart(familyLeaveCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['배우자 출산 휴가', '난임치료 휴가', '본인 출산 (단태아)', '본인 출산 (다태아)'],
+                    datasets: [{
+                        label: '휴가 일수',
+                        data: [10, 6, 120, 150],
+                        backgroundColor: [brilliantBlues.mediumBlue, brilliantBlues.lightBlue, brilliantBlues.darkBlue, brilliantBlues.accentRed],
+                        borderColor: brilliantBlues.white,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    ...chartTooltipOptions,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                             grid: { display: false }
+                        },
+                        y: {
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        ...chartTooltipOptions.plugins,
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Long Service Chart
+        const longServiceCtx = document.getElementById('longServiceChart');
+        if (longServiceCtx) {
+            new Chart(longServiceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['5주년', '10주년', '20주년'],
+                    datasets: [{
+                        label: '현금 지원 (만원)',
+                        data: [70, 150, 300],
+                        backgroundColor: brilliantBlues.mediumBlue,
+                        stack: 'Stack 0',
+                    },
+                    {
+                        label: '휴가 지원 (일)',
+                        data: [5, 5, 20],
+                        backgroundColor: brilliantBlues.accentRed,
+                        stack: 'Stack 1',
+                    }]
+                },
+                options: {
+                    ...chartTooltipOptions,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true, grid: { display: false } }
+                    },
+                    plugins: {
+                         ...chartTooltipOptions.plugins,
+                        legend: {
+                            position: 'top',
+                        },
+                         tooltip: {
+                            ...chartTooltipOptions.plugins.tooltip,
+                             callbacks: {
+                                 ...chartTooltipOptions.plugins.tooltip.callbacks,
+                                 label: function(context) {
+                                     let label = context.dataset.label || '';
+                                     if (label) {
+                                         label += ': ';
+                                     }
+                                     if (context.parsed.y !== null) {
+                                        const unit = context.dataset.label.includes('현금') ? '만원' : '일';
+                                        label += `${context.parsed.y} ${unit}`;
+                                     }
+                                     return label;
+                                 }
+                             }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
