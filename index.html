@@ -22,8 +22,8 @@
       6. Section 5 - A Fun & Convenient Workplace (동호회 및 편의 지원): Illustrate perks for daily life.
 
     Visualization Selection Plan (NO SVG, NO MERMAID):
-    - Data Point: Family-friendly Leave -> Goal: Compare -> Visualization: Bar Chart (Chart.js/Canvas).
-    - Data Point: Long-term Service Awards -> Goal: Compare -> Visualization: Bar Chart (Chart.js/Canvas).
+    - Data Point: Family-friendly Leave -> Goal: Compare/Inform -> Visualization: HTML List.
+    - Data Point: Long-term Service Awards -> Goal: Compare/Inform -> Visualization: HTML Table.
     - Data Point: Loan Types -> Goal: Organize/Compare -> Visualization: HTML Table.
     - Data Point: Group Insurance Coverage -> Goal: Organize -> Visualization: HTML Table.
     - Data Point: Convenience Facilities -> Goal: Organize/Inform -> Visualization: HTML/CSS Icon List.
@@ -87,7 +87,7 @@
         <main class="space-y-12">
             
             <section id="work-life-balance">
-                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">WORK & LIFE BALANCE: 휴가 및 근무 제도</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">휴가 및 근무 제도</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
                     <div class="bg-white rounded-lg shadow-lg p-6">
@@ -112,21 +112,40 @@
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-xl font-bold text-[#0B3954] mb-4">가족친화 휴가</h3>
                         <p class="text-gray-600 mb-6">임신, 출산, 육아 등 가족의 중요한 순간을 함께할 수 있도록 다양한 휴가 제도를 운영합니다.</p>
-                        <div class="chart-container">
-                            <canvas id="familyLeaveChart"></canvas>
-                        </div>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>배우자 출산 휴가: 10일</li>
+                            <li>난임치료 휴가: 6일</li>
+                            <li>본인 출산 (단태아): 120일</li>
+                            <li>본인 출산 (다태아): 150일</li>
+                            <li>태아검진 휴가 (본인/배우자): 반일</li>
+                            <li>유사산 휴가 (본인): 5일 ~ 90일 (임신 기간에 따라 상이)</li>
+                            <li>유사산 휴가 (배우자): 5일 ~ 10일 (임신 기간에 따라 상이)</li>
+                        </ul>
                     </div>
                 </div>
             </section>
             
             <section id="celebration">
-                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">CELEBRATING MILESTONES: 축하 및 경조사 지원</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">축하 및 경조사 지원</h2>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-xl font-bold text-[#0B3954] mb-4">장기근속 지원</h3>
                         <p class="text-gray-600 mb-6">네오위즈와 함께한 시간에 대한 감사와 존중을 담아 특별한 보상을 제공합니다.</p>
-                        <div class="chart-container">
-                            <canvas id="longServiceChart"></canvas>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="p-3 font-bold">근속 기간</th>
+                                        <th class="p-3 font-bold">현금 지원</th>
+                                        <th class="p-3 font-bold">휴가 지원</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b"><td class="p-3">5주년</td><td class="p-3">70만원</td><td class="p-3">5일</td></tr>
+                                    <tr class="border-b"><td class="p-3">10주년</td><td class="p-3">150만원</td><td class="p-3">5일</td></tr>
+                                    <tr class="border-b"><td class="p-3">20주년</td><td class="p-3">300만원</td><td class="p-3">20일</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="bg-white rounded-lg shadow-lg p-6">
@@ -156,7 +175,7 @@
             </section>
 
             <section id="financial-support">
-                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">FINANCIAL SUPPORT: 사내대출 및 이자 지원</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">사내대출 및 이자 지원</h2>
                 <div class="bg-white rounded-lg shadow-lg p-6 md:col-span-2">
                     <h3 class="text-xl font-bold text-[#0B3954] mb-4">사내 대출 제도</h3>
                     <p class="text-gray-600 mb-6">직원들의 안정적인 생활을 위해 목적에 따라 낮은 금리의 대출 제도를 운영합니다.</p>
@@ -182,7 +201,7 @@
             </section>
             
             <section id="health-care">
-                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">HEALTH CARE: 건강 관리 지원</h2>
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">건강 관리 지원</h2>
                  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <span class="text-5xl">🏥</span>
@@ -203,7 +222,7 @@
             </section>
 
             <section id="office-life">
-                 <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">ENJOYABLE LIFE: 즐거운 회사 생활</h2>
+                 <h2 class="text-3xl font-bold text-center mb-8 text-[#0B3954]">즐거운 회사 생활</h2>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                      <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-xl font-bold text-[#0B3954] mb-4">사내 동호회 & 교육</h3>
@@ -273,97 +292,9 @@
             return lines;
         }
 
-        // Family Leave Chart
-        const familyLeaveCtx = document.getElementById('familyLeaveChart');
-        if (familyLeaveCtx) {
-            new Chart(familyLeaveCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['배우자 출산 휴가', '난임치료 휴가', '본인 출산 (단태아)', '본인 출산 (다태아)'],
-                    datasets: [{
-                        label: '휴가 일수',
-                        data: [10, 6, 120, 150],
-                        backgroundColor: [brilliantBlues.mediumBlue, brilliantBlues.lightBlue, brilliantBlues.darkBlue, brilliantBlues.accentRed],
-                        borderColor: brilliantBlues.white,
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    ...chartTooltipOptions,
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                             grid: { display: false }
-                        },
-                        y: {
-                            grid: { display: false }
-                        }
-                    },
-                    plugins: {
-                        ...chartTooltipOptions.plugins,
-                        legend: { display: false }
-                    }
-                }
-            });
-        }
+        // Family Leave Chart removed as per user request.
 
-        // Long Service Chart
-        const longServiceCtx = document.getElementById('longServiceChart');
-        if (longServiceCtx) {
-            new Chart(longServiceCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['5주년', '10주년', '20주년'],
-                    datasets: [{
-                        label: '현금 지원 (만원)',
-                        data: [70, 150, 300],
-                        backgroundColor: brilliantBlues.mediumBlue,
-                        stack: 'Stack 0',
-                    },
-                    {
-                        label: '휴가 지원 (일)',
-                        data: [5, 5, 20],
-                        backgroundColor: brilliantBlues.accentRed,
-                        stack: 'Stack 1',
-                    }]
-                },
-                options: {
-                    ...chartTooltipOptions,
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { stacked: true, grid: { display: false } },
-                        y: { stacked: true, beginAtZero: true, grid: { display: false } }
-                    },
-                    plugins: {
-                         ...chartTooltipOptions.plugins,
-                        legend: {
-                            position: 'top',
-                        },
-                         tooltip: {
-                            ...chartTooltipOptions.plugins.tooltip,
-                             callbacks: {
-                                 ...chartTooltipOptions.plugins.tooltip.callbacks,
-                                 label: function(context) {
-                                     let label = context.dataset.label || '';
-                                     if (label) {
-                                         label += ': ';
-                                     }
-                                     if (context.parsed.y !== null) {
-                                        const unit = context.dataset.label.includes('현금') ? '만원' : '일';
-                                        label += `${context.parsed.y} ${unit}`;
-                                     }
-                                     return label;
-                                 }
-                             }
-                        }
-                    }
-                }
-            });
-        }
+        // Long Service Chart removed as per user request.
     </script>
 </body>
 </html>
